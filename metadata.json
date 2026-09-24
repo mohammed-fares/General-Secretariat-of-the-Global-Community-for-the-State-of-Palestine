@@ -1,0 +1,6 @@
+{
+  "name": "General Secretariat of the Global Community for the State of Palestine",
+  "description": "منصة دولية تجمع الأفراد والمؤسسات والمجتمع المدني والباحثين من مختلف دول العالم حول المعرفة والتواصل والمشاركة المدنية المرتبطة بقضية دولة فلسطين.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
