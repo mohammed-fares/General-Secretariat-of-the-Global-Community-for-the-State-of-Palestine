@@ -18,13 +18,28 @@ import { Leadership } from './components/Leadership';
 import { AboutSecretariat } from './components/AboutSecretariat';
 import { YouthAndResearchers } from './components/YouthAndResearchers';
 import { LegalStatus } from './components/LegalStatus';
+import { KnowledgeAndYouthPage } from './components/KnowledgeAndYouthPage';
 import { AdminPanel } from './components/AdminPanel';
 import { Footer } from './components/Footer';
+import { loadCmsStore, CmsStoreData } from './data/contentStore';
 
 export default function App() {
   const [currentLang, setCurrentLang] = useState<Language>('ar');
   const [activeTab, setActiveTab] = useState<NavigationTab>('home');
   const [member, setMember] = useState<MemberProfile | null>(null);
+  const [cmsStore, setCmsStore] = useState<CmsStoreData>(() => loadCmsStore());
+
+  useEffect(() => {
+    const handleCmsUpdate = (e: any) => {
+      if (e?.detail) {
+        setCmsStore(e.detail);
+      } else {
+        setCmsStore(loadCmsStore());
+      }
+    };
+    window.addEventListener('pal_gc_content_updated', handleCmsUpdate);
+    return () => window.removeEventListener('pal_gc_content_updated', handleCmsUpdate);
+  }, []);
 
   // Initialize and persist member state from localStorage
   useEffect(() => {
@@ -124,50 +139,43 @@ export default function App() {
             <WhySecretariat currentLang={currentLang} />
             <VisionMission currentLang={currentLang} />
             <Principles currentLang={currentLang} />
+            <Leadership currentLang={currentLang} />
+            <Transparency currentLang={currentLang} />
             <LegalStatus currentLang={currentLang} />
           </div>
         )}
 
-        {activeTab === 'youth' && (
-          <YouthAndResearchers
+        {/* Unified Knowledge, Research & Youth Page */}
+        {(activeTab === 'knowledge' || activeTab === 'youth') && (
+          <KnowledgeAndYouthPage
             currentLang={currentLang}
+            member={member}
+            onToggleBookmark={handleToggleBookmark}
             onNavigate={handleNavigate}
+            initialSubTab={activeTab === 'youth' ? 'youth' : 'all'}
           />
+        )}
+
+        {/* State of Palestine & Civic Participation */}
+        {(activeTab === 'palestine' || activeTab === 'civil') && (
+          <div>
+            <StateOfPalestine currentLang={currentLang} />
+            <GlobalPresence currentLang={currentLang} onNavigate={handleNavigate} />
+            <CivilParticipation
+              currentLang={currentLang}
+              member={member}
+              onRsvp={handleRsvp}
+            />
+            <PartnersNetwork currentLang={currentLang} />
+          </div>
         )}
 
         {activeTab === 'legal_status' && (
           <LegalStatus currentLang={currentLang} />
         )}
 
-        {activeTab === 'palestine' && (
-          <div>
-            <StateOfPalestine currentLang={currentLang} />
-            <KnowledgeCenter
-              currentLang={currentLang}
-              member={member}
-              onToggleBookmark={handleToggleBookmark}
-            />
-          </div>
-        )}
-
-        {activeTab === 'knowledge' && (
-          <KnowledgeCenter
-            currentLang={currentLang}
-            member={member}
-            onToggleBookmark={handleToggleBookmark}
-          />
-        )}
-
         {activeTab === 'news' && (
           <NewsStatements currentLang={currentLang} />
-        )}
-
-        {activeTab === 'civil' && (
-          <CivilParticipation
-            currentLang={currentLang}
-            member={member}
-            onRsvp={handleRsvp}
-          />
         )}
 
         {activeTab === 'transparency' && (
@@ -209,73 +217,55 @@ export default function App() {
           />
         )}
 
-        {/* FULL HOME PAGE: Follows Section 5 Final Breakdown explicitly */}
+        {/* DYNAMIC HOMEPAGE: Configured, Ordered & Managed via Admin Panel */}
         {activeTab === 'home' && (
           <>
-            {/* 1. HERO */}
-            <Hero
-              currentLang={currentLang}
-              onNavigate={handleNavigate}
-            />
-
-            {/* 2. الإطار التأسيسي والمنطلقات الرسمية */}
-            <AboutSecretariat
-              currentLang={currentLang}
-              onNavigate={handleNavigate}
-            />
-
-            {/* 3. التعريف بالأمانة (لماذا الأمانة العامة؟) */}
-            <WhySecretariat currentLang={currentLang} />
-
-            {/* 4. الرؤية والرسالة */}
-            <VisionMission currentLang={currentLang} />
-
-            {/* 5. مبادئنا المؤسسية الستة */}
-            <Principles currentLang={currentLang} />
-
-            {/* 6. فئة الشباب والباحثين والمبادرات الثمانية */}
-            <YouthAndResearchers
-              currentLang={currentLang}
-              onNavigate={handleNavigate}
-            />
-
-            {/* 7. الحضور العالمي والخريطة التفاعلية */}
-            <GlobalPresence
-              currentLang={currentLang}
-              onNavigate={handleNavigate}
-            />
-
-            {/* 8. البيانات والأخبار الرسمية */}
-            <NewsStatements currentLang={currentLang} />
-
-            {/* 9. مركز المعرفة والوثائق */}
-            <KnowledgeCenter
-              currentLang={currentLang}
-              member={member}
-              onToggleBookmark={handleToggleBookmark}
-            />
-
-            {/* 10. ملف دولة فلسطين الشامل */}
-            <StateOfPalestine currentLang={currentLang} />
-
-            {/* 11. مركز المشاركة المدنية والفعاليات */}
-            <CivilParticipation
-              currentLang={currentLang}
-              member={member}
-              onRsvp={handleRsvp}
-            />
-
-            {/* 12. الوضع القانوني للأمانة العامة */}
-            <LegalStatus currentLang={currentLang} />
-
-            {/* 13. شبكة المؤسسات والشركاء */}
-            <PartnersNetwork currentLang={currentLang} />
-
-            {/* 14. الشفافية والمساءلة */}
-            <Transparency currentLang={currentLang} />
-
-            {/* 15. القيادة والأمانة العامة */}
-            <Leadership currentLang={currentLang} />
+            {cmsStore.homepageSections
+              .filter((sec) => sec.enabled)
+              .sort((a, b) => a.order - b.order)
+              .map((sec) => {
+                switch (sec.id) {
+                  case 'hero':
+                    return <Hero key={sec.id} currentLang={currentLang} onNavigate={handleNavigate} />;
+                  case 'about':
+                    return <AboutSecretariat key={sec.id} currentLang={currentLang} onNavigate={handleNavigate} />;
+                  case 'why_pillars':
+                    return <WhySecretariat key={sec.id} currentLang={currentLang} />;
+                  case 'vision_mission':
+                    return <VisionMission key={sec.id} currentLang={currentLang} />;
+                  case 'knowledge_youth':
+                    return (
+                      <KnowledgeAndYouthPage
+                        key={sec.id}
+                        currentLang={currentLang}
+                        member={member}
+                        onToggleBookmark={handleToggleBookmark}
+                        onNavigate={handleNavigate}
+                      />
+                    );
+                  case 'news':
+                    return <NewsStatements key={sec.id} currentLang={currentLang} />;
+                  case 'palestine':
+                    return <StateOfPalestine key={sec.id} currentLang={currentLang} />;
+                  case 'global_presence':
+                    return <GlobalPresence key={sec.id} currentLang={currentLang} onNavigate={handleNavigate} />;
+                  case 'civil_events':
+                    return (
+                      <CivilParticipation
+                        key={sec.id}
+                        currentLang={currentLang}
+                        member={member}
+                        onRsvp={handleRsvp}
+                      />
+                    );
+                  case 'partners':
+                    return <PartnersNetwork key={sec.id} currentLang={currentLang} />;
+                  case 'governance':
+                    return <Leadership key={sec.id} currentLang={currentLang} />;
+                  default:
+                    return null;
+                }
+              })}
           </>
         )}
       </main>

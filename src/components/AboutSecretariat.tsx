@@ -62,66 +62,65 @@ export const AboutSecretariat: React.FC<AboutSecretariatProps> = ({ currentLang,
           </div>
         </div>
 
-        {/* 3 Core Blocks: Vision, Mission, and General Objective */}
+        {/* Distinct Institutional Framework & Operational Scope (No duplication with Vision/Mission) */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-          
-          {/* Vision */}
+          {/* 1. الصفة المدنية المستقلة */}
           <div className="p-8 rounded-2xl bg-[#F7F8F6] border border-[#E5E7EB] flex flex-col justify-between">
             <div>
               <div className="w-12 h-12 rounded-xl bg-white border border-[#E5E7EB] flex items-center justify-center text-[#087443] mb-6 shadow-xs">
-                <Compass className="w-6 h-6" />
+                <ShieldCheck className="w-6 h-6" />
               </div>
               <h3 className="text-xl font-bold text-[#111111] mb-3">
-                {currentLang === 'ar' ? 'الرؤية' : 'Our Vision'}
+                {currentLang === 'ar' ? 'الصفة المدنية الدولية' : 'Independent Civic Status'}
               </h3>
               <p className="text-sm text-[#4B5563] leading-relaxed mb-4">
                 {currentLang === 'ar'
-                  ? 'بناء مجتمع عالمي منظم ومتعدد اللغات والثقافات، تتوافر لأفراده مساحة مشتركة للتواصل والمعرفة والتوثيق والمشاركة المدنية حول قضية دولة فلسطين. وجعل المعلومات والوثائق والمصادر ذات الصلة متاحة بصورة منظمة وموثقة تتيح للأفراد والمؤسسات والباحثين التعرف إلى التطورات والأطر الدولية.'
-                  : 'Building an organized, multilingual, and multicultural global community with shared access to knowledge, dialogue, and documentation on the State of Palestine, anchoring this diverse civic presence within a transparent institutional space.'}
+                  ? 'كيان مدني مستقل ينشط وفق الأطر القانونية واللوائح المنظمة لعمل المؤسسات الدولية غير الحكومية، دون تمثيل سياسي حزبي أو تبعية تنفيذية لأي جهة.'
+                  : 'An independent international civic entity operating within statutory frameworks governing international non-governmental bodies.'}
               </p>
             </div>
             <div className="pt-4 border-t border-[#E5E7EB] text-xs font-bold text-[#087443]">
-              {currentLang === 'ar' ? 'من شعوب العالم إلى دولة فلسطين' : 'From the Peoples of the World'}
+              {currentLang === 'ar' ? 'إطار غير حكومي مستقل' : 'Non-Governmental Framework'}
             </div>
           </div>
 
-          {/* Mission */}
+          {/* 2. المرجعية القانونية والتوثيق */}
           <div className="p-8 rounded-2xl bg-[#F7F8F6] border border-[#E5E7EB] flex flex-col justify-between">
             <div>
               <div className="w-12 h-12 rounded-xl bg-white border border-[#E5E7EB] flex items-center justify-center text-[#087443] mb-6 shadow-xs">
-                <Layers className="w-6 h-6" />
+                <Scale className="w-6 h-6" />
               </div>
               <h3 className="text-xl font-bold text-[#111111] mb-3">
-                {currentLang === 'ar' ? 'الرسالة' : 'Our Mission'}
+                {currentLang === 'ar' ? 'المرجعية الحقوقية والقانونية' : 'Legal & Human Rights Reference'}
               </h3>
               <p className="text-sm text-[#4B5563] leading-relaxed mb-4">
                 {currentLang === 'ar'
-                  ? 'إنشاء بنية دولية مدنية تجمع بين المعرفة والتواصل والتوثيق والمشاركة. وتوفير المعلومات والوثائق والمصادر ذات الصلة، وتنظيمها وإتاحتها بلغات متعددة لمساعدة الأفراد والباحثين والمؤسسات على فهم السياقات التاريخية والقانونية، وبناء شبكة تواصل دولية تجمع المشاركين من مختلف الدول.'
-                  : 'Establishing an international civic architecture uniting knowledge, dialogue, archival curation, and participation. Providing multilingual access to historical and legal records to empower scholars, institutions, and citizens globally.'}
+                  ? 'الاستناد الصارم إلى القانون الدولي الإنساني، وقرارات الجمعية العامة للأمم المتحدة، ومخرجات المحاكم الدولية المختصة في توثيق الحقوق الفلسطينية.'
+                  : 'Strict adherence to international humanitarian law, UN General Assembly resolutions, and multilateral court determinations.'}
               </p>
             </div>
             <div className="pt-4 border-t border-[#E5E7EB] text-xs font-bold text-[#087443]">
-              {currentLang === 'ar' ? 'بنية دولية للمعرفة والتوثيق' : 'International Knowledge Infrastructure'}
+              {currentLang === 'ar' ? 'قرارات الشرعية الدولية' : 'International Law Reference'}
             </div>
           </div>
 
-          {/* General Objective */}
+          {/* 3. الشراكة الأكاديمية والمدنية */}
           <div className="p-8 rounded-2xl bg-[#F7F8F6] border border-[#E5E7EB] flex flex-col justify-between">
             <div>
               <div className="w-12 h-12 rounded-xl bg-white border border-[#E5E7EB] flex items-center justify-center text-[#087443] mb-6 shadow-xs">
-                <Target className="w-6 h-6" />
+                <Globe2 className="w-6 h-6" />
               </div>
               <h3 className="text-xl font-bold text-[#111111] mb-3">
-                {currentLang === 'ar' ? 'الهدف العام' : 'General Objective'}
+                {currentLang === 'ar' ? 'التكامل العابر للقارات' : 'Cross-Continental Coalition'}
               </h3>
               <p className="text-sm text-[#4B5563] leading-relaxed mb-4">
                 {currentLang === 'ar'
-                  ? 'بناء إطار دولي مدني منظم يعكس المشاركة المجتمعية العالمية في قضية دولة فلسطين، ويحول هذا الحضور المتنوع إلى شبكة معرفية وتواصلية ومؤسسية قابلة للتنظيم والتوثيق والاستمرار، تجمع الباحثين والعاملين في مجالات القانون والإعلام والتعليم والترجمة والتكنولوجيا والمجتمع المدني.'
-                  : 'Constructing an organized global civic framework reflecting worldwide societal engagement in Palestine, transforming diverse contributions into an institutional, sustainable network of scholars, jurists, educators, translators, and technologists.'}
+                  ? 'بناء جسور معرفية مستدامة بين الجامعات والمنظمات والباحثين في خمس قارات، لتيسير وصول الشعوب إلى الحقيقة الأرشيفية الموثقة.'
+                  : 'Forging enduring knowledge bridges across five continents to ensure public access to authenticated archival facts.'}
               </p>
             </div>
             <div className="pt-4 border-t border-[#E5E7EB] text-xs font-bold text-[#087443]">
-              {currentLang === 'ar' ? 'استدامة مؤسسية وشبكة معرفية' : 'Institutional Sustainability'}
+              {currentLang === 'ar' ? 'شبكة جامعات وباحثين عالمية' : 'Global University Network'}
             </div>
           </div>
 

@@ -76,119 +76,63 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
           </div>
 
-          {/* ZONE 2: NAVIGATION LINKS */}
-          <nav className="hidden lg:flex items-center gap-5 xl:gap-7 text-sm font-medium text-[#4B5563]">
+          {/* ZONE 2: NAVIGATION LINKS (Exactly 5 Consolidated Sections) */}
+          <nav className="hidden lg:flex items-center gap-6 xl:gap-8 text-sm font-medium text-[#4B5563]">
+            {/* 1. Home */}
             <button
               onClick={() => handleNavClick('home')}
-              className={`hover:text-[#111111] transition-colors pb-1 border-b-2 ${
+              className={`hover:text-[#111111] transition-colors pb-1 border-b-2 font-['Cairo'] ${
                 activeTab === 'home' ? 'text-[#087443] border-[#087443] font-bold' : 'border-transparent'
               }`}
             >
               {t.nav.home}
             </button>
+
+            {/* 2. About Secretariat */}
             <button
               onClick={() => handleNavClick('about')}
-              className={`hover:text-[#111111] transition-colors pb-1 border-b-2 ${
-                activeTab === 'about' ? 'text-[#087443] border-[#087443] font-bold' : 'border-transparent'
+              className={`hover:text-[#111111] transition-colors pb-1 border-b-2 font-['Cairo'] ${
+                ['about', 'legal_status', 'transparency', 'leadership'].includes(activeTab)
+                  ? 'text-[#087443] border-[#087443] font-bold'
+                  : 'border-transparent'
               }`}
             >
               {t.nav.about}
             </button>
-            <button
-              onClick={() => handleNavClick('palestine')}
-              className={`hover:text-[#111111] transition-colors pb-1 border-b-2 ${
-                activeTab === 'palestine' ? 'text-[#087443] border-[#087443] font-bold' : 'border-transparent'
-              }`}
-            >
-              {t.nav.palestine}
-            </button>
+
+            {/* 3. Knowledge, Research & Youth Hub (Merged) */}
             <button
               onClick={() => handleNavClick('knowledge')}
-              className={`hover:text-[#111111] transition-colors pb-1 border-b-2 ${
-                activeTab === 'knowledge' ? 'text-[#087443] border-[#087443] font-bold' : 'border-transparent'
+              className={`hover:text-[#111111] transition-colors pb-1 border-b-2 font-['Cairo'] ${
+                ['knowledge', 'youth'].includes(activeTab)
+                  ? 'text-[#087443] border-[#087443] font-bold'
+                  : 'border-transparent'
               }`}
             >
               {t.nav.knowledge}
             </button>
+
+            {/* 4. State of Palestine & Civic Participation */}
             <button
-              onClick={() => handleNavClick('youth')}
-              className={`hover:text-[#111111] transition-colors pb-1 border-b-2 ${
-                activeTab === 'youth' ? 'text-[#087443] border-[#087443] font-bold' : 'border-transparent'
+              onClick={() => handleNavClick('palestine')}
+              className={`hover:text-[#111111] transition-colors pb-1 border-b-2 font-['Cairo'] ${
+                ['palestine', 'civil'].includes(activeTab)
+                  ? 'text-[#087443] border-[#087443] font-bold'
+                  : 'border-transparent'
               }`}
             >
-              {t.nav.youth}
+              {t.nav.palestine}
             </button>
+
+            {/* 5. Official Statements & News */}
             <button
               onClick={() => handleNavClick('news')}
-              className={`hover:text-[#111111] transition-colors pb-1 border-b-2 ${
+              className={`hover:text-[#111111] transition-colors pb-1 border-b-2 font-['Cairo'] ${
                 activeTab === 'news' ? 'text-[#087443] border-[#087443] font-bold' : 'border-transparent'
               }`}
             >
               {t.nav.news}
             </button>
-
-            {/* More Menu Dropdown */}
-            <div className="relative" ref={moreRef}>
-              <button
-                onClick={() => setMoreDropdownOpen(!moreDropdownOpen)}
-                className={`flex items-center gap-1 hover:text-[#111111] transition-colors pb-1 border-b-2 ${
-                  ['civil', 'legal_status', 'transparency', 'leadership'].includes(activeTab)
-                    ? 'text-[#087443] border-[#087443] font-bold'
-                    : 'border-transparent'
-                }`}
-              >
-                <span>{t.nav.more}</span>
-                <ChevronDown className="w-3.5 h-3.5" />
-              </button>
-
-              {moreDropdownOpen && (
-                <div className={`absolute mt-2 w-48 bg-white border border-[#E5E7EB] rounded-lg shadow-lg py-1 z-50 ${
-                  currentLang === 'ar' ? 'left-0' : 'right-0'
-                }`}>
-                  <button
-                    onClick={() => handleNavClick('civil')}
-                    className={`w-full text-start px-4 py-2 text-xs transition-colors ${
-                      activeTab === 'civil' ? 'bg-[#F0FDF4] text-[#087443] font-semibold' : 'text-[#374151] hover:bg-[#F9FAFB]'
-                    }`}
-                  >
-                    {t.nav.civil}
-                  </button>
-                  <button
-                    onClick={() => handleNavClick('legal_status')}
-                    className={`w-full text-start px-4 py-2 text-xs transition-colors ${
-                      activeTab === 'legal_status' ? 'bg-[#F0FDF4] text-[#087443] font-semibold' : 'text-[#374151] hover:bg-[#F9FAFB]'
-                    }`}
-                  >
-                    {t.nav.legal_status}
-                  </button>
-                  <button
-                    onClick={() => handleNavClick('transparency')}
-                    className={`w-full text-start px-4 py-2 text-xs transition-colors ${
-                      activeTab === 'transparency' ? 'bg-[#F0FDF4] text-[#087443] font-semibold' : 'text-[#374151] hover:bg-[#F9FAFB]'
-                    }`}
-                  >
-                    {t.nav.transparency}
-                  </button>
-                  <button
-                    onClick={() => handleNavClick('leadership')}
-                    className={`w-full text-start px-4 py-2 text-xs transition-colors ${
-                      activeTab === 'leadership' ? 'bg-[#F0FDF4] text-[#087443] font-semibold' : 'text-[#374151] hover:bg-[#F9FAFB]'
-                    }`}
-                  >
-                    {t.nav.leadership}
-                  </button>
-                  <button
-                    onClick={() => handleNavClick('admin')}
-                    className={`w-full text-start px-4 py-2 text-xs transition-colors flex items-center justify-between border-t border-[#E5E7EB] mt-1 pt-2 font-bold ${
-                      activeTab === 'admin' ? 'bg-[#087443] text-white' : 'text-[#087443] hover:bg-[#F0FDF4]'
-                    }`}
-                  >
-                    <span>{currentLang === 'ar' ? 'لوحة التحكم (CMS)' : 'Admin Control Panel'}</span>
-                    <Settings className="w-3.5 h-3.5" />
-                  </button>
-                </div>
-              )}
-            </div>
           </nav>
 
           {/* ZONE 3: PRIMARY ACTIONS (Language selector + CMS + Membership CTA) */}
@@ -286,96 +230,73 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
       </div>
 
-      {/* Mobile Menu Drawer */}
+      {/* Mobile Menu Drawer (5 Consolidated Sections) */}
       {mobileMenuOpen && (
         <div className="lg:hidden border-t border-[#E5E7EB] bg-white px-4 pt-3 pb-6 space-y-2">
+          {/* 1. Home */}
           <button
             onClick={() => handleNavClick('home')}
-            className={`w-full text-start px-3 py-2 rounded-md text-sm ${
-              activeTab === 'home' ? 'bg-[#F0FDF4] text-[#087443] font-semibold' : 'text-[#374151]'
+            className={`w-full text-start px-3 py-2.5 rounded-lg text-sm font-['Cairo'] ${
+              activeTab === 'home' ? 'bg-[#F0FDF4] text-[#087443] font-bold' : 'text-[#374151]'
             }`}
           >
             {t.nav.home}
           </button>
+
+          {/* 2. About Secretariat */}
           <button
             onClick={() => handleNavClick('about')}
-            className={`w-full text-start px-3 py-2 rounded-md text-sm ${
-              activeTab === 'about' ? 'bg-[#F0FDF4] text-[#087443] font-semibold' : 'text-[#374151]'
+            className={`w-full text-start px-3 py-2.5 rounded-lg text-sm font-['Cairo'] ${
+              ['about', 'legal_status', 'transparency', 'leadership'].includes(activeTab)
+                ? 'bg-[#F0FDF4] text-[#087443] font-bold'
+                : 'text-[#374151]'
             }`}
           >
             {t.nav.about}
           </button>
-          <button
-            onClick={() => handleNavClick('palestine')}
-            className={`w-full text-start px-3 py-2 rounded-md text-sm ${
-              activeTab === 'palestine' ? 'bg-[#F0FDF4] text-[#087443] font-semibold' : 'text-[#374151]'
-            }`}
-          >
-            {t.nav.palestine}
-          </button>
+
+          {/* 3. Knowledge, Research & Youth Hub (Merged) */}
           <button
             onClick={() => handleNavClick('knowledge')}
-            className={`w-full text-start px-3 py-2 rounded-md text-sm ${
-              activeTab === 'knowledge' ? 'bg-[#F0FDF4] text-[#087443] font-semibold' : 'text-[#374151]'
+            className={`w-full text-start px-3 py-2.5 rounded-lg text-sm font-['Cairo'] ${
+              ['knowledge', 'youth'].includes(activeTab)
+                ? 'bg-[#F0FDF4] text-[#087443] font-bold'
+                : 'text-[#374151]'
             }`}
           >
             {t.nav.knowledge}
           </button>
+
+          {/* 4. State of Palestine & Civic Participation */}
           <button
-            onClick={() => handleNavClick('youth')}
-            className={`w-full text-start px-3 py-2 rounded-md text-sm ${
-              activeTab === 'youth' ? 'bg-[#F0FDF4] text-[#087443] font-semibold' : 'text-[#374151]'
+            onClick={() => handleNavClick('palestine')}
+            className={`w-full text-start px-3 py-2.5 rounded-lg text-sm font-['Cairo'] ${
+              ['palestine', 'civil'].includes(activeTab)
+                ? 'bg-[#F0FDF4] text-[#087443] font-bold'
+                : 'text-[#374151]'
             }`}
           >
-            {t.nav.youth}
+            {t.nav.palestine}
           </button>
+
+          {/* 5. Official Statements & News */}
           <button
             onClick={() => handleNavClick('news')}
-            className={`w-full text-start px-3 py-2 rounded-md text-sm ${
-              activeTab === 'news' ? 'bg-[#F0FDF4] text-[#087443] font-semibold' : 'text-[#374151]'
+            className={`w-full text-start px-3 py-2.5 rounded-lg text-sm font-['Cairo'] ${
+              activeTab === 'news' ? 'bg-[#F0FDF4] text-[#087443] font-bold' : 'text-[#374151]'
             }`}
           >
             {t.nav.news}
           </button>
-          <button
-            onClick={() => handleNavClick('civil')}
-            className={`w-full text-start px-3 py-2 rounded-md text-sm ${
-              activeTab === 'civil' ? 'bg-[#F0FDF4] text-[#087443] font-semibold' : 'text-[#374151]'
-            }`}
-          >
-            {t.nav.civil}
-          </button>
-          <button
-            onClick={() => handleNavClick('legal_status')}
-            className={`w-full text-start px-3 py-2 rounded-md text-sm ${
-              activeTab === 'legal_status' ? 'bg-[#F0FDF4] text-[#087443] font-semibold' : 'text-[#374151]'
-            }`}
-          >
-            {t.nav.legal_status}
-          </button>
-          <button
-            onClick={() => handleNavClick('transparency')}
-            className={`w-full text-start px-3 py-2 rounded-md text-sm ${
-              activeTab === 'transparency' ? 'bg-[#F0FDF4] text-[#087443] font-semibold' : 'text-[#374151]'
-            }`}
-          >
-            {t.nav.transparency}
-          </button>
-          <button
-            onClick={() => handleNavClick('leadership')}
-            className={`w-full text-start px-3 py-2 rounded-md text-sm ${
-              activeTab === 'leadership' ? 'bg-[#F0FDF4] text-[#087443] font-semibold' : 'text-[#374151]'
-            }`}
-          >
-            {t.nav.leadership}
-          </button>
+
+          {/* Admin CMS Access */}
           <button
             onClick={() => handleNavClick('admin')}
-            className={`w-full text-start px-3 py-2 rounded-md text-sm flex items-center justify-between font-bold ${
+            className={`w-full text-start px-3 py-2.5 rounded-lg text-sm flex items-center justify-between font-bold font-['Cairo'] border-t border-[#E5E7EB] mt-2 pt-3 ${
               activeTab === 'admin' ? 'bg-[#087443] text-white' : 'bg-[#F0FDF4] text-[#087443]'
             }`}
           >
-            <span>{currentLang === 'ar' ? 'لوحة التحكم وإدارة المحتوى' : 'Admin Control Panel'}</span>
+            <span>{currentLang === 'ar' ? 'لوحة التحكم وإدارة المحتوى (CMS)' : 'Admin Control Panel'}</span>
             <Settings className="w-4 h-4" />
           </button>
           <div className="pt-2 border-t border-[#E5E7EB]">

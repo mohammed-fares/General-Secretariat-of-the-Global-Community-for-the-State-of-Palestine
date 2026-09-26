@@ -63,10 +63,10 @@ export const Footer: React.FC<FooterProps> = ({
 
           {/* Directory Links 1 */}
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-white mb-4">
+            <h4 className="text-xs font-semibold tracking-normal text-white mb-4 font-['Cairo']">
               {t.footer.sections}
             </h4>
-            <ul className="space-y-2.5 text-xs">
+            <ul className="space-y-2.5 text-xs font-['Cairo']">
               <li>
                 <button
                   onClick={() => onNavigate('home')}
@@ -85,14 +85,6 @@ export const Footer: React.FC<FooterProps> = ({
               </li>
               <li>
                 <button
-                  onClick={() => onNavigate('palestine')}
-                  className="hover:text-white transition-colors"
-                >
-                  {t.nav.palestine}
-                </button>
-              </li>
-              <li>
-                <button
                   onClick={() => onNavigate('knowledge')}
                   className="hover:text-white transition-colors"
                 >
@@ -101,10 +93,10 @@ export const Footer: React.FC<FooterProps> = ({
               </li>
               <li>
                 <button
-                  onClick={() => onNavigate('youth')}
+                  onClick={() => onNavigate('palestine')}
                   className="hover:text-white transition-colors"
                 >
-                  {t.nav.youth}
+                  {t.nav.palestine}
                 </button>
               </li>
               <li>
